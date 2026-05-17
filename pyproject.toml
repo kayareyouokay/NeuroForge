@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "neuroforge"
+version = "0.1.0"
+description = "A compact neural network framework with NumPy autograd and a backend-oriented core."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Kay", email = "krishbhardwaj0619@gmail.com" }]
+keywords = ["autograd", "deep-learning", "numpy", "neural-networks"]
+dependencies = ["numpy>=1.24", "pyyaml>=6.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.4", "mypy>=1.8", "pre-commit>=3.6"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/neuroforge"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+src = ["src", "tests", "examples", "benchmarks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["B008"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+warn_unused_ignores = false
+disallow_subclassing_any = false
+exclude = ["examples", "benchmarks"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
